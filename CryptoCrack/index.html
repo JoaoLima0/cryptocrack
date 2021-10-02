@@ -1,0 +1,246 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery page 3</title>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    PLACEHOLDER
+  </script>
+
+  <script src="jquery-ui/jquery-ui.js">
+    PLACEHOLDER
+  </script>
+
+  <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <style media="screen">
+    /*
+    ***COLOR PALLET:***
+      #1FAB89
+      #62D2A2
+      #92F3C4
+      #D7FBE8
+      #E2FBEE
+      #EEFBF4
+
+
+    */
+
+    #placeholder {}
+
+    body {
+      margin: 0;
+      background-color: #D7FBE8;
+    }
+
+    .sidebar {
+      width: 350px;
+      height: 100%;
+      margin: 0;
+      background-color: #1FAB89;
+      padding-top: 40px;
+      float: left;
+    }
+
+    .logo {
+      width: 220px;
+      height: 150px;
+      margin-left: 100px;
+    }
+
+    .logo1 {
+      padding: 10px;
+      padding-left: 30px;
+      font-size: 45px;
+      font-family: "Permanent Marker";
+    }
+
+    .logo2 {
+      font-size: 45px;
+      font-family: "Permanent Marker";
+      position: relative;
+      top: -32px;
+      left: 70px;
+      width: 50px;
+    }
+
+    .sidebar hr {
+      float: right;
+      margin-right: 20px;
+      width: 70%;
+      border: none;
+      border-top: 1px #62D2A2 solid;
+
+    }
+
+    .sidebar-selector {
+      width: 220px;
+      height: 500px;
+      margin-left: 100px;
+      margin-top: 50px;
+    }
+
+    .selector-item {
+      color: black;
+      text-align: right;
+      font-size: 24px;
+      font-family: "Courgette";
+      padding: 9px;
+      float: right;
+    }
+
+    .selector-item-border {
+      margin-top: 22px;
+      width: 10px;
+      height: 8px;
+      border-right: 8px #92F3C4 dotted;
+      float: right;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    #iframe {
+      float: right;
+      padding: 0 auto;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo1">Crypto</div>
+      <div class="logo2">Crack</div>
+    </div>
+
+    <hr />
+
+    <div class="sidebar-selector">
+      <div id="binary">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          Binary
+        </div>
+      </div>
+
+      <div class="clear"></div>
+      <div id="number">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          Number
+        </div>
+      </div>
+
+      <div class="clear"></div>
+      <div id="ascii">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          ASCII
+        </div>
+      </div>
+
+      <div class="clear"></div>
+      <div id="cesar">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          Cesar
+        </div>
+      </div>
+
+      <div class="clear"></div>
+      <div id="vigenere">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          Vigenere
+        </div>
+      </div>
+
+      <div class="clear"></div>
+      <div id="anagram">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          Anagram
+        </div>
+      </div>
+
+      <div class="clear"></div>
+      <div id="anagramsplus">
+        <div class="selector-item-border"></div>
+        <div class="selector-item">
+          Anagram Plus
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <iframe id="iframe" src="anagramsplus/index.html" width="" height=""></iframe>
+
+  <iframe id="loading" src="loading.html" hidden="true"></iframe>
+  <iframe id="empty" src="" hidden="true"></iframe>
+
+
+  <script type="text/javascript">
+    var placeholder = 1;
+
+    $(".sidebar").height($(window).height());
+
+    iframeResize();
+
+    $(window).resize(function() {
+      iframeResize();
+    });
+
+    function iframeResize() {
+      $("#iframe").width($(window).width() - $(".sidebar").width() - 5);
+      $("#iframe").height($(window).height());
+    }
+
+    $("#binary").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "binary/index.html");
+    });
+
+    $("#number").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "number/index.html");
+    });
+
+    $("#ascii").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "ascii/index.html");
+    });
+
+    $("#cesar").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "cesar/index.html");
+    });
+
+    $("#vigenere").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "vigenere/index.html");
+    });
+
+    $("#anagram").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "anagram/index.html");
+    });
+
+    $("#anagramsplus").click(function() {
+      $("#iframe").attr("src", "loading.html");
+      $("#iframe").attr("src", "anagramsplus/index.html");
+    });
+  </script>
+
+</body>
+
+</html>

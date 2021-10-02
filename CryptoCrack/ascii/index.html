@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery page 3</title>
+
+  <script type="text/javascript" src="../jsCodes/convertingFunctions.js">
+    PLACEHOLDER
+  </script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js">
+    PLACEHOLDER
+  </script>
+
+  <script src="jquery-ui/jquery-ui.js">
+    PLACEHOLDER
+  </script>
+
+  <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <style media="screen">
+    /*
+    ***COLOR PALLET:***
+      #1FAB89
+      #62D2A2
+      #92F3C4
+      #D7FBE8
+      #E2FBEE
+      #EEFBF4
+
+
+    */
+
+    #placeholder {}
+
+    body {
+      background-color: #D7FBE8;
+      margin-left: 50px;
+    }
+
+    h1 {
+      font-family: "Courgette";
+      font-size: 250%;
+      padding-top: 50px;
+    }
+
+    hr {
+      float: right;
+      border: none;
+      border-top: 7px #92F3C4 dotted;
+      width: 60%;
+      margin-right: 20px;
+    }
+
+    .p1 {
+      margin-top: 80px;
+      font-family: "Patrick Hand";
+      font-size: 22px;
+    }
+
+    #normal {
+      height: 200px;
+      resize: none;
+      float: left;
+    }
+
+    #ascii {
+      height: 200px;
+      float: right;
+      margin-right: 20px;
+      resize: none;
+    }
+
+    .middle {
+      height: 202px;
+      float: left;
+      margin: 0;
+      padding: 0;
+      padding: 2px 0;
+    }
+
+    .buttonLine {
+      margin: 40px 15%;
+      display: block;
+    }
+
+    .convertButton {
+      width: 150px;
+      height: 40px;
+      margin: 0 auto;
+    }
+
+    .arrow {
+      border: solid black;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+    }
+
+    .right {
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+
+    .left {
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+    }
+
+    .arrowLeft {
+      position: absolute;
+      left: 0px;
+    }
+
+    .arrowRight {
+      position: absolute;
+      right: 0px;
+    }
+
+    .up {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+
+    .down {
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>ASCII</h1>
+
+  <hr>
+
+  <p class="p1">ASCII conversion: Converts each character into the correspondent ASCII value</p>
+
+  <textarea id="normal" placeholder="Text"></textarea>
+
+  <div class="middle">
+    <div class="buttonLine toAscii">
+      <button type="button" id="textToAscii" class="convertButton">Convert to ASCII</button>
+      <!--<div class="arrowRight"><i class="arrow right"></i></div>-->
+    </div>
+    <div class="buttonLine toText">
+      <button type="button" id="asciiToText" class="convertButton">Convert to text</button>
+      <!--<div class="arrowLeft"><i class="arrow left"></i></div>-->
+    </div>
+
+
+
+
+  </div>
+
+  <textarea id="ascii" placeholder="ASCII"></textarea>
+
+
+  <script type="text/javascript">
+    var placeholder = 1;
+
+    resizeAll();
+
+    $(window).resize(function() {
+      resizeAll();
+    });
+
+    function resizeAll() {
+      $("#normal").width(($(window).width() - 50 - 30) / 3);
+      $("#ascii").width(($(window).width() - 50 - 30) / 3);
+      $(".middle").width(($(window).width() - 50 - 30) / 3 - 12);
+      $(".convertButton").width($(".middle").width() * 0.6);
+      $(".buttonLine").css("margin", "40px " + ($(".middle").width() * 0.2 - 8) + "px");
+    }
+
+    $(".middle").click(function() {
+      //alert($("#asciiToText").width())
+    });
+
+
+    $("#textToAscii").click(function() {
+      var cFunct = new convertingFunctions();
+      var text = $("#normal").val();
+      var output = cFunct.textToAscii(text);
+      $("#ascii").val(output);
+    });
+
+    $("#asciiToText").click(function() {
+      var cFunct = new convertingFunctions();
+      var text = $("#ascii").val();
+      var output = cFunct.asciiToText(text);
+      $("#normal").val(output);
+    });
+  </script>
+
+</body>
+
+</html>

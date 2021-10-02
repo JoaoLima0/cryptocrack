@@ -1,0 +1,234 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery page 3</title>
+
+  <script type="text/javascript" src="../jsCodes/convertingFunctions.js">
+    PLACEHOLDER
+  </script>
+
+  <script type="text/javascript" src="../jsCodes/anagramFiles/anagramManaging.js">
+    PLACEHOLDER
+  </script>
+
+  <script type="text/javascript" src="../jsCodes/anagramFiles/wordFileReading.js">
+    PLACEHOLDER
+  </script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js">
+    PLACEHOLDER
+  </script>
+
+  <script src="jquery-ui/jquery-ui.js">
+    PLACEHOLDER
+  </script>
+
+  <script src="libraries/p5.js"></script>
+  <script src="libraries/p5.dom.js"></script>
+  <script src="libraries/p5.sound.js"></script>
+  <script src="sketch.js"></script>
+
+  <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <style media="screen">
+    /*
+    ***COLOR PALLET:***
+      #1FAB89
+      #62D2A2
+      #92F3C4
+      #D7FBE8
+      #E2FBEE
+      #EEFBF4
+
+
+    */
+
+    #placeholder {}
+
+    body {
+      background-color: #D7FBE8;
+      margin-left: 50px;
+    }
+
+    h1 {
+      font-family: "Courgette";
+      font-size: 250%;
+      padding-top: 50px;
+    }
+
+    hr {
+      float: right;
+      border: none;
+      border-top: 7px #92F3C4 dotted;
+      width: 60%;
+      margin-right: 20px;
+    }
+
+    .p1 {
+      margin-top: 80px;
+      font-family: "Patrick Hand";
+      font-size: 22px;
+    }
+
+    #normal {
+      height: 50px;
+      resize: none;
+      float: left;
+      margin-right: 20px;
+    }
+
+    .clearFloat {
+      clear: both;
+    }
+
+    .languageDiv {
+      //background-color: grey;
+      height: 40px;
+    }
+
+    .languageChoice {
+      height: 40px;
+      display: inline-block;
+      font-size: 24px;
+      margin: 0 50px 0 100px;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Anagrams Plus</h1>
+
+  <hr>
+
+  <p class="p1">Anagrams Plus: Utilize more advanced UI to find anagrams in larger, more complex pools of characters</p>
+
+  <textarea id="normal" placeholder="Text"></textarea>
+
+  <div class="clearFloat"></div>
+
+  <!-- <div class="languageDiv">
+    <div class="languageChoice">
+      <label for="language">Portuguese</label>
+      <input type="radio" name="language" value="pt">
+    </div>
+    <div class="languageChoice">
+      <label for="language">English</label>
+      <input type="radio" name="language" value="en">
+    </div>
+  </div> -->
+
+  <button id="textToAnagramNew">Anagrams new</button>
+  <button id="textToAnagram">Anagrams (old)</button>
+
+  <div id="canvasContainer"></div>
+
+  <div>
+    <p><b>Next:</b></p>
+    <p>
+      Toggle letter by clicking (0.4 &lt x%1 &lt 0.6) <br>
+      Sliders (or smth) to adjust section delimeters <br>
+      Auto toggle letters when inside section (develop algorithm to determine that) <br>
+      Update anagram output (btn and auto(toggle auto?)) <br>
+      Move around/rearrange, create and delete letters <br>
+      Visualize list of active letters <br>
+      Improve UI? If I want to
+    </p>
+  </div>
+
+  <p class="p1">Found anagrams: </p>
+
+  <p id="anagram"></p>
+
+  <ul>
+
+  </ul>
+
+
+  <script type="text/javascript">
+    var placeholder = 1;
+
+    resizeAll();
+
+    $(window).resize(function() {
+      resizeAll();
+    });
+
+    function resizeAll() {
+      $("#normal").width(($(window).width() - 50 - 30));
+      $(".languageDiv").width(($(window).width() - 50 - 24));
+      $(".languageChoice").width(($(".languageDiv").width()) / 4);
+      $(".languageChoice").height(($(".languageDiv").height()) * (2 / 3));
+      $(".languageChoice").css("top", ($(".languageDiv").height()) / 6);
+      var marginSide = ((($(".languageDiv").width() - ($(".languageChoice").width())) / 6) - 1);
+      $(".languageChoice").css("margin", "auto " + marginSide + "px" + " auto " + marginSide + "px");
+    }
+
+
+    //anagMan setup
+
+    var anagMan;
+    var arrayBig = [];
+    var arrayPoints = {}
+    var wordFileReading = new wordFileReading();
+    //fileReading();
+
+    async function fileReading() {
+      const rawArray = await wordFileReading.readFilePT();
+      const arrayBigTemp = await wordFileReading.arrayConstructor(rawArray);
+      const arrayPointsTemp = await wordFileReading.arrayPointsConstructor(rawArray);
+      console.log(arrayBigTemp);
+      console.log(arrayPointsTemp)
+      // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+      arrayBig = arrayBigTemp;
+      arrayPoints = arrayPointsTemp;
+      setupManager();
+    }
+
+    async function setupManager() {
+      anagMan = new anagramManaging(arrayBig, arrayPoints);
+    }
+
+
+
+
+
+
+
+    $("#textToAnagram").click(function() {
+      var language = $("input[type='button']:checked").val(); //"pt" or "en"
+
+      var cFunct = new convertingFunctions();
+      var text = $("#normal").val();
+      var outputArray = anagMan.getRealAnagrams(text);
+      var output = "";
+      for (var i = 0; i < outputArray.length; i++) {
+        output += outputArray[i];
+        output += "<br>";
+      }
+      $("#anagram").html(output);
+    });
+
+    $("#textToAnagramNew").click(function() {
+      // var language = $("input[type='button']:checked").val(); //"pt" or "en"
+      //
+      // // var cFunct = new convertingFunctions();
+      var text = $("#normal").val();
+      createMassLPoints(text)
+      // var outputArray = anagMan.getRealAnagramsWithPoints(text);
+      // var output = "";
+      // for (var i = 0; i < outputArray.length; i++) {
+      //   output += outputArray[i];
+      //   output += "<br>";
+      // }
+      // $("#anagram").html(output);
+    });
+  </script>
+
+</body>
+
+</html>

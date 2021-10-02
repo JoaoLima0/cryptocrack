@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>jQuery page 3</title>
+
+  <script type="text/javascript" src="../jsCodes/convertingFunctions.js">
+    PLACEHOLDER
+  </script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js">
+    PLACEHOLDER
+  </script>
+
+  <script src="jquery-ui/jquery-ui.js">
+    PLACEHOLDER
+  </script>
+
+  <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <style media="screen">
+    /*
+    ***COLOR PALLET:***
+      #1FAB89
+      #62D2A2
+      #92F3C4
+      #D7FBE8
+      #E2FBEE
+      #EEFBF4
+
+
+    */
+
+    #placeholder {}
+
+    body {
+      background-color: #D7FBE8;
+      margin-left: 50px;
+    }
+
+    h1 {
+      font-family: "Courgette";
+      font-size: 250%;
+      padding-top: 50px;
+    }
+
+    hr {
+      float: right;
+      border: none;
+      border-top: 7px #92F3C4 dotted;
+      width: 60%;
+      margin-right: 20px;
+    }
+
+    .p1 {
+      margin-top: 80px;
+      font-family: "Patrick Hand";
+      font-size: 22px;
+    }
+
+    #normal {
+      height: 200px;
+      resize: none;
+      float: left;
+    }
+
+    #vigenere {
+      height: 200px;
+      float: right;
+      margin-right: 20px;
+      resize: none;
+    }
+
+    .middle {
+      height: 202px;
+      float: left;
+      margin: 0;
+      padding: 0;
+      padding: 2px 0;
+    }
+
+    .buttonLine {
+      margin: 16px 15%;
+      display: block;
+      height: 40px;
+    }
+
+    .convertButton {
+      width: 150px;
+      height: 40px;
+      margin: 0 auto;
+    }
+
+    .key {
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Vigenere</h1>
+
+  <hr>
+
+  <p class="p1">Vigenere conversion: Shifts each letter to the (key) next letter in the alphabet (e.g. A --(key 3)-> D, W --(key 9)--> F)</p>
+
+  <textarea id="normal" placeholder="Text"></textarea>
+
+  <div class="middle">
+    <div class="buttonLine">
+      <div class="key">
+        <label class="keyLabel" for="keyPicker">Key:</label>
+        <input type="text" id="keyText" name="keyPicker" min="0" max="25">
+      </div>
+      <!--<div class="arrowRight"><i class="arrow right"></i></div>-->
+    </div>
+    <div class="buttonLine toVigenere">
+      <button type="button" id="textToVigenere" class="convertButton">Encrypt</button>
+      <!--<div class="arrowRight"><i class="arrow right"></i></div>-->
+    </div>
+    <div class="buttonLine toText">
+      <button type="button" id="vigenereToText" class="convertButton">Decrypt</button>
+      <!--<div class="arrowLeft"><i class="arrow left"></i></div>-->
+    </div>
+
+
+
+
+  </div>
+
+  <textarea id="vigenere" placeholder="Vigenere"></textarea>
+
+
+  <script type="text/javascript">
+    var placeholder = 1;
+
+    resizeAll();
+
+    $(window).resize(function() {
+      resizeAll();
+    });
+
+    function resizeAll() {
+      $("#normal").width(($(window).width() - 50 - 30) / 3);
+      $("#vigenere").width(($(window).width() - 50 - 30) / 3);
+      $(".middle").width(($(window).width() - 50 - 30) / 3 - 12);
+      $(".convertButton").width($(".middle").width() * 0.6);
+      $(".key").width($(".middle").width() * 0.6);
+      $("#keyText").width($(".key").width() - $(".keyLabel").width() - 13);
+      $(".buttonLine").css("margin", "16px " + ($(".middle").width() * 0.2 - 8) + "px");
+    }
+
+    $(".middle").click(function() {
+      //alert($("#vigenereToText").width())
+    });
+
+    $("#submitTest").click(function() {
+      alert($("#keyText").val());
+    });
+
+
+    $("#textToVigenere").click(function() {
+      var cFunct = new convertingFunctions();
+      var text = $("#normal").val();
+      var key = $("#keyText").val();
+      var output = cFunct.encryptVigenere(text, key);
+      $("#vigenere").val(output);
+    });
+
+    $("#vigenereToText").click(function() {
+      var cFunct = new convertingFunctions();
+      var text = $("#vigenere").val();
+      var key = $("#keyText").val();
+      var output = cFunct.decryptVigenere(text, key);
+      $("#normal").val(output);
+    });
+  </script>
+
+</body>
+
+</html>
